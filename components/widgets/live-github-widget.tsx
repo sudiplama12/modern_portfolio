@@ -15,9 +15,9 @@ interface GitHubData {
 
 export default function LiveGitHubWidget() {
   const [githubData, setGithubData] = useState<GitHubData>({
-    commits: 1247,
-    stars: 89,
-    repos: 42,
+    commits: 500,
+    stars: 5,
+    repos: 20,
     lastCommit: "2 hours ago",
   })
 

@@ -3,19 +3,29 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Moon, Sun, Menu, X } from "lucide-react"
+import {
+  Moon,
+  Sun,
+  Menu,
+  X,
+  Github,
+  Linkedin,
+} from "lucide-react"
 import { useTheme } from "next-themes"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
     }
+
     window.addEventListener("scroll", handleScroll)
+
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -32,42 +42,119 @@ export default function Navigation() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-morphism" : "bg-transparent"
+        scrolled
+          ? "glass-morphism backdrop-blur-xl border-b border-white/10"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <motion.div whileHover={{ scale: 1.05 }} className="text-2xl font-bold liquid-gradient font-sora">
-            John Doe
-          </motion.div>
+          {/* Logo */}
+          <motion.a
+            href="#home"
+            whileHover={{ scale: 1.05 }}
+            className="text-2xl md:text-3xl font-bold liquid-gradient font-sora"
+          >
+            Sudip Lama
+          </motion.a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                whileHover={{ scale: 1.1 }}
-                className="text-white/80 hover:text-cyan-400 transition-colors"
+                whileHover={{ scale: 1.08 }}
+                className="text-white/80 hover:text-cyan-400 transition-colors text-sm uppercase tracking-wide"
               >
                 {item.name}
               </motion.a>
             ))}
+          </div>
+
+          {/* Right Side */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* GitHub */}
+            <motion.a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:text-cyan-400"
+              >
+                <Github className="h-5 w-5" />
+              </Button>
+            </motion.a>
+
+            {/* LinkedIn */}
+            <motion.a
+              href="https://linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:text-cyan-400"
+              >
+                <Linkedin className="h-5 w-5" />
+              </Button>
+            </motion.a>
+
+            {/* Theme Toggle */}
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() =>
+                setTheme(theme === "dark" ? "light" : "dark")
+              }
               className="text-white hover:text-cyan-400"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
             </Button>
           </div>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} className="text-white">
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center gap-2">
+            {/* Theme Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() =>
+                setTheme(theme === "dark" ? "light" : "dark")
+              }
+              className="text-white"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </Button>
+
+            {/* Menu Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white"
+            >
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -77,18 +164,52 @@ export default function Navigation() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-4 glass-morphism rounded-lg p-4"
+            transition={{ duration: 0.3 }}
+            className="md:hidden mt-4 glass-morphism rounded-2xl border border-white/10 p-6"
           >
-            {navItems.map((item) => (
+            <div className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-white/80 hover:text-cyan-400 transition-colors text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile Socials */}
+            <div className="flex items-center gap-4 mt-6">
               <a
-                key={item.name}
-                href={item.href}
-                className="block py-2 text-white/80 hover:text-cyan-400 transition-colors"
-                onClick={() => setIsOpen(false)}
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {item.name}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:text-cyan-400"
+                >
+                  <Github className="h-5 w-5" />
+                </Button>
               </a>
-            ))}
+
+              <a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:text-cyan-400"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </Button>
+              </a>
+            </div>
           </motion.div>
         )}
       </div>

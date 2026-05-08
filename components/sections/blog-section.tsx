@@ -17,34 +17,12 @@ const blogPosts = [
     tags: ["WebAssembly", "Performance", "Future Tech"],
     image: "/placeholder.svg?height=200&width=400",
   },
-  {
-    id: 2,
-    title: "Building Immersive 3D Experiences with Three.js",
-    excerpt:
-      "A comprehensive guide to creating stunning 3D web experiences using Three.js and modern web technologies.",
-    date: "2024-01-10",
-    readTime: "12 min read",
-    tags: ["Three.js", "3D", "WebGL"],
-    image: "/placeholder.svg?height=200&width=400",
-  },
-  {
-    id: 3,
-    title: "AI-Powered Development: Tools That Are Changing the Game",
-    excerpt: "How artificial intelligence is transforming the development workflow and what it means for developers.",
-    date: "2024-01-05",
-    readTime: "6 min read",
-    tags: ["AI", "Development", "Tools"],
-    image: "/placeholder.svg?height=200&width=400",
-  },
+  
+  
 ]
 
 const openSourceProjects = [
-  {
-    name: "react-3d-carousel",
-    description: "A performant 3D carousel component for React applications",
-    stars: 234,
-    language: "TypeScript",
-  },
+
   {
     name: "webgl-particle-system",
     description: "High-performance particle system using WebGL",
@@ -187,7 +165,7 @@ export default function BlogSection() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-12 gap-1">
-                    {Array.from({ length: 365 }).map((_, i) => (
+                    {Array.from({ length: 150 }).map((_, i) => (
                       <div
                         key={i}
                         className={`w-3 h-3 rounded-sm ${
@@ -202,7 +180,7 @@ export default function BlogSection() {
                       />
                     ))}
                   </div>
-                  <p className="text-white/60 text-sm mt-4">1,247 contributions in the last year</p>
+                  <p className="text-white/60 text-sm mt-4">100 contributions in the last year</p>
                 </CardContent>
               </Card>
             </motion.div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function HolographicAvatar() {
   return (
@@ -8,27 +9,42 @@ export default function HolographicAvatar() {
       {/* Holographic Ring */}
       <motion.div
         animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+        transition={{
+          duration: 20,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "linear",
+        }}
         className="absolute inset-0 rounded-full border-2 border-cyan-400/30"
       />
 
       {/* Inner Ring */}
       <motion.div
         animate={{ rotate: -360 }}
-        transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+        transition={{
+          duration: 15,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "linear",
+        }}
         className="absolute inset-2 rounded-full border border-purple-400/40"
       />
 
       {/* Avatar Container */}
       <motion.div
         animate={{ y: [-5, 5, -5] }}
-        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-        className="absolute inset-4 rounded-full glass-morphism flex items-center justify-center overflow-hidden"
+        transition={{
+          duration: 4,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+        className="absolute inset-4 rounded-full glass-morphism overflow-hidden flex items-center justify-center"
       >
-        {/* Placeholder Avatar - Replace with actual image */}
-        <div className="w-full h-full bg-gradient-to-br from-cyan-400/20 to-purple-400/20 rounded-full flex items-center justify-center">
-          <div className="text-4xl">👨‍💻</div>
-        </div>
+        <Image
+          src="/profile.jpeg"
+          alt="Profile"
+          width={120}
+          height={120}
+          className="rounded-full object-cover"
+        />
       </motion.div>
 
       {/* Glow Effect */}
