@@ -34,7 +34,7 @@
 
 ## 🚀 Demo
 
-🌐 [**View Live Demo**](https://s10-modern-portfolio.vercel.app)
+🌐 [**View Live Demo**]()
 
 ---
 
@@ -51,10 +51,10 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/senotron/modern-portfolio.git
+git clone 
 
 # Go to the project directory
-cd modern-portfolio
+cd  foldername
 
 # Install dependencies
 npm install
