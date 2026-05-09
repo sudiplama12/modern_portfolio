@@ -1,13 +1,11 @@
 {
-  "installCommand": "npm install --legacy-peer-deps",
-  "routes": [
+  "redirects": [
     {
-      "src": "/",
-      "dest": "/"
-    },
-    {
-      "src": "/test",
-      "dest": "/"
+      "source": "/test",
+      "destination": "/",
+      "permanent": false
     }
-  ]
+  ],
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build"
 }
