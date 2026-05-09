@@ -3,21 +3,21 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import {
-  Moon,
-  Sun,
-  Menu,
-  X,
-  Github,
-  Linkedin,
-} from "lucide-react"
+import { Moon, Sun, Menu, X, Github, Linkedin } from "lucide-react"
 import { useTheme } from "next-themes"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
+  // ✅ FIX 1: hydration safety
+  const [mounted, setMounted] = useState(false)
+
   const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +25,6 @@ export default function Navigation() {
     }
 
     window.addEventListener("scroll", handleScroll)
-
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -51,6 +50,7 @@ export default function Navigation() {
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
+
           {/* Logo */}
           <motion.a
             href="#home"
@@ -74,8 +74,9 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Right Side */}
+          {/* Right Side (Desktop) */}
           <div className="hidden md:flex items-center gap-3">
+
             {/* GitHub */}
             <motion.a
               href="https://github.com/yourusername"
@@ -83,11 +84,7 @@ export default function Navigation() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
             >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:text-cyan-400"
-              >
+              <Button variant="ghost" size="icon" className="text-white hover:text-cyan-400">
                 <Github className="h-5 w-5" />
               </Button>
             </motion.a>
@@ -99,25 +96,21 @@ export default function Navigation() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
             >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:text-cyan-400"
-              >
+              <Button variant="ghost" size="icon" className="text-white hover:text-cyan-400">
                 <Linkedin className="h-5 w-5" />
               </Button>
             </motion.a>
 
-            {/* Theme Toggle */}
+            {/* Theme Toggle (FIXED) */}
             <Button
               variant="ghost"
               size="icon"
-              onClick={() =>
-                setTheme(theme === "dark" ? "light" : "dark")
-              }
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="text-white hover:text-cyan-400"
             >
-              {theme === "dark" ? (
+              {!mounted ? (
+                <div className="h-5 w-5 animate-pulse bg-white/20 rounded" />
+              ) : theme === "dark" ? (
                 <Sun className="h-5 w-5" />
               ) : (
                 <Moon className="h-5 w-5" />
@@ -125,18 +118,19 @@ export default function Navigation() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Right Side */}
           <div className="md:hidden flex items-center gap-2">
-            {/* Theme Button */}
+
+            {/* Theme Toggle (FIXED) */}
             <Button
               variant="ghost"
               size="icon"
-              onClick={() =>
-                setTheme(theme === "dark" ? "light" : "dark")
-              }
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="text-white"
             >
-              {theme === "dark" ? (
+              {!mounted ? (
+                <div className="h-5 w-5 animate-pulse bg-white/20 rounded" />
+              ) : theme === "dark" ? (
                 <Sun className="h-5 w-5" />
               ) : (
                 <Moon className="h-5 w-5" />
@@ -150,11 +144,7 @@ export default function Navigation() {
               onClick={() => setIsOpen(!isOpen)}
               className="text-white"
             >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -180,32 +170,15 @@ export default function Navigation() {
               ))}
             </div>
 
-            {/* Mobile Socials */}
             <div className="flex items-center gap-4 mt-6">
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-white hover:text-cyan-400"
-                >
+              <a href="https://github.com/yourusername" target="_blank">
+                <Button variant="ghost" size="icon" className="text-white hover:text-cyan-400">
                   <Github className="h-5 w-5" />
                 </Button>
               </a>
 
-              <a
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-white hover:text-cyan-400"
-                >
+              <a href="https://linkedin.com/in/yourusername" target="_blank">
+                <Button variant="ghost" size="icon" className="text-white hover:text-cyan-400">
                   <Linkedin className="h-5 w-5" />
                 </Button>
               </a>

@@ -9,6 +9,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      react: "react",
+      "react-dom": "react-dom",
+    }
+    return config
+  },
 }
 
 export default nextConfig
