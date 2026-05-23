@@ -104,7 +104,7 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-white/80 mb-8">
-            Frontend Developer • Designer • AI Enthusiast
+            Frontend Developer • Designer • AI Enthusiast •Stock Market Trader
           </p>
 
           {/* Buttons */}
